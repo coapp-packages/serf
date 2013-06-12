@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="PreBuildCmds;PreBuildTargets;Build;PostBuildCmds;PostBuildTargets" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="CoApp" >
+    <CoAppEtcDirectory>$(registry:HKEY_LOCAL_MACHINE\Software\Outercurve\CoApp.Powershell\etc)</CoAppEtcDirectory>
+  </PropertyGroup>
+  
+  <Import Condition="Exists('$(CoAppEtcDirectory)\common-variables.vcxproj')" Project="$(CoAppEtcDirectory)\common-variables.vcxproj" />
+  
+  <PropertyGroup Label="ConfigurationSettings">
+    <!-- set to Application or DynamicLibrary (DynamicLibrary can get altered to StaticLibrary by PTK -->
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+
+    <!-- Common Compiler Defines (semicolon delimited) -->
+    <Defines>WIN32</Defines>
+
+    <!-- Additional Include folders (semicolon delimited) -->
+    <IncludeDirectories>..\;</IncludeDirectories>
+
+    <!-- Additional Library folders (semicolon delimited) -->
+    <LibraryDirectories></LibraryDirectories>
+
+    <!-- Libraries to Link with -->
+    <Libraries>secur32.lib;</Libraries>
+    
+    <!-- Batch script to run before Build-->
+    <PreBuild></PreBuild>
+
+    <!-- Batch script to run after Build-->
+    <PostBuild></PostBuild>
+
+    <!-- Targets to run before Build (semcolon delimited)-->
+    <PreBuildTargets></PreBuildTargets>
+
+    <!-- Targets to run before Build (semcolon delimited)-->
+    <PostBuildTargets></PostBuildTargets>
+  
+    <!-- for Dynamic libs, you can specify the Module .DEF file path -->
+    <ModuleDefinitionFile></ModuleDefinitionFile>
+  </PropertyGroup>
+
+  <Import Condition="Exists('$(CoAppEtcDirectory)\common-header.vcxproj')" Project="$(CoAppEtcDirectory)\common-header.vcxproj" />
+
+  <ItemGroup>
+    <!-- Include the source files to compile here -->
+    <!-- <ClCompile Include="..\src\foo.c" /> -->
+    <ClCompile Include="..\context.c" />
+    <ClCompile Include="..\ssltunnel.c" />
+    <ClCompile Include="..\incoming.c" />
+    <ClCompile Include="..\outgoing.c" />
+    <ClCompile Include="..\auth\auth.c" />
+    <ClCompile Include="..\auth\auth_basic.c" />
+    <ClCompile Include="..\auth\auth_digest.c" />
+    <ClCompile Include="..\auth\auth_kerb.c" />
+    <ClCompile Include="..\auth\auth_kerb_gss.c" />
+    <ClCompile Include="..\auth\auth_kerb_sspi.c" />
+    <ClCompile Include="..\buckets\aggregate_buckets.c" />
+    <ClCompile Include="..\buckets\allocator.c" />
+    <ClCompile Include="..\buckets\barrier_buckets.c" />
+    <ClCompile Include="..\buckets\buckets.c" />
+    <ClCompile Include="..\buckets\bwtp_buckets.c" />
+    <ClCompile Include="..\buckets\chunk_buckets.c" />
+    <ClCompile Include="..\buckets\dechunk_buckets.c" />
+    <ClCompile Include="..\buckets\deflate_buckets.c" />
+    <ClCompile Include="..\buckets\file_buckets.c" />
+    <ClCompile Include="..\buckets\headers_buckets.c" />
+    <ClCompile Include="..\buckets\iovec_buckets.c" />
+    <ClCompile Include="..\buckets\limit_buckets.c" />
+    <ClCompile Include="..\buckets\mmap_buckets.c" />
+    <ClCompile Include="..\buckets\request_buckets.c" />
+    <ClCompile Include="..\buckets\response_buckets.c" />
+    <ClCompile Include="..\buckets\response_body_buckets.c" />
+    <ClCompile Include="..\buckets\simple_buckets.c" />
+    <ClCompile Include="..\buckets\socket_buckets.c" />
+    <ClCompile Include="..\buckets\ssl_buckets.c" />
+  </ItemGroup>
+
+  <Import Condition="Exists('$(CoAppEtcDirectory)\common-footer.vcxproj')" Project="$(CoAppEtcDirectory)\common-footer.vcxproj" />
+</Project>

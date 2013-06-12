@@ -1,0 +1,44 @@
+@import default_tools;
+
+default {
+
+    .Exec {
+        Condition="Exists('$(MSBuildThisFileDirectory)packages.config')";
+        Command = @"nuget install $(MSBuildThisFileDirectory)packages.config -x -OutputDirectory .\packages >nul";
+    };
+
+    .Exec {
+        Condition="!Exists('$(MSBuildThisFileDirectory)serf-1.def')";
+        WorkingDirectory="$(MSBuildThisFileDirectory)..";
+        Command = @"python build/gen_def.py serf.h serf_bucket_types.h serf_bucket_util.h > COPKG/serf-1.def";
+    };
+
+    (PlatformToolsets, Architectures, ReleaseOrDebug, Linkage ) => {
+        .PushEnvironment{};
+        .LoadSystemEnvironment{};
+        .SetEnvironmentFromTarget.Target = "VC_${0}_${1}";
+        
+        .Message.Text = @"Environment vc_${0}_${1} -- ${2}  ${3}  *** IsValid => $(IsEnvironmentValid)";
+
+        .Warning{
+            Condition="!$(IsEnvironmentValid)";
+            Text = @"********\r\nSKIPPING: vc_${0}_${1} -- ${2}  ${3}  ";
+        };
+
+        .Exec {
+            Condition="$(IsEnvironmentValid)";
+            Command = @"msbuild serf-1.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};UsesConfigurationType=${3}";
+        };
+
+        .PopEnvironment{};
+    };
+};
+
+clean {
+    .RemoveDir.Directories = @"intermediate";
+};
+
+nuke {
+    .RemoveDir.Directories = @"output";
+    .RemoveDir.Directories = @"intermediate";
+};

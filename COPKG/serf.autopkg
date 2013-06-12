@@ -1,0 +1,63 @@
+
+
+nuget {
+	// the nuspec file metadata. Gets created/updated on build
+	nuspec {
+		id = serf;
+		version : 1.2.1.0;
+		title: serf Library;
+		authors: {serf team};
+		owners: {CoApp Project, Garrett Serack};
+		licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0";
+		projectUrl: "http://github.com/coapp-packages/serf";
+		requireLicenseAcceptance:false;
+		summary:serf library;
+		description: @"The serf library is a high performance C-based HTTP client library built upon the Apache Portable Runtime (APR) library.
+	serf homepage:  http://code.google.com/p/serf/";
+		releaseNotes: "Release of serf 1.2.1 libraries.";
+		copyright: Copyright 2013;
+		tags: "serf http native CoApp";
+
+	};
+
+    dependencies {
+        packages : {
+            zlib/1.2;
+            openssl/1.0;
+            libapr-util/1.5;
+        };
+    }
+
+	// the files that go into the content folders
+	// (inserted into the nuspec file)
+	files {
+		include: {
+            ..\serf.h;
+            ..\serf_bucket_types.h;
+            ..\serf_bucket_util.h;
+        };
+
+		("v100,v110", "Win32,x64", "release,debug", "Dynamic") => {
+			[${0},${1},${2},${3}] {
+				lib:     { .\output\${0}\${1}\${2}\${3}\serf-1.lib };
+				bin:     { .\output\${0}\${1}\${2}\${3}\serf-1.dll };
+				symbols: { .\output\${0}\${1}\${2}\${3}\serf-1.pdb };
+			};
+		};
+		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg") => {
+			[${0},${1},${2},${3}] {
+				lib:     { .\output\${0}\${1}\${2}\${3}\serf-1.lib };
+			};
+		};
+
+	};
+
+	// the VC++ .props file that gets generated and inserted into the ${d_content} folder
+	props { 
+	};
+
+	// the VC++ .targets file that gets generated and inserted into the ${d_content} folder
+	targets {
+	};
+}
+

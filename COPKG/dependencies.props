@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Linkage-zlib>$(UsesConfigurationType)</Linkage-zlib>
+	<Linkage-zlib_redist>$(UsesConfigurationType)</Linkage-zlib_redist>
+	<Linkage-openssl>$(UsesConfigurationType)</Linkage-openssl>
+	<Linkage-openssl_redist>$(UsesConfigurationType)</Linkage-openssl_redist>
+	<Linkage-libapr>$(UsesConfigurationType)</Linkage-libapr>
+	<Linkage-libapr_redist>$(UsesConfigurationType)</Linkage-libapr_redist>
+	<CallingConvention-libapr>$(CallingConvention)</CallingConvention-libapr>
+	<Linkage-libapr-util>$(UsesConfigurationType)</Linkage-libapr-util>
+	<Linkage-libapr-util_redist>$(UsesConfigurationType)</Linkage-libapr-util_redist>
+	<CallingConvention-libapr-util>$(CallingConvention)</CallingConvention-libapr-util>
+  </PropertyGroup>
+  <Import Project="$(MSBuildThisFileDirectory)packages\zlib\build\native\zlib.props" Condition="exists('$(MSBuildThisFileDirectory)packages\zlib\build\native\zlib.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\zlib.redist\build\native\zlib.redist.props" Condition="exists('$(MSBuildThisFileDirectory)packages\zlib.redist\build\native\zlib.redist.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\openssl\build\native\openssl.props" Condition="exists('$(MSBuildThisFileDirectory)packages\openssl\build\native\openssl.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\openssl.redist\build\native\openssl.redist.props" Condition="exists('$(MSBuildThisFileDirectory)packages\openssl.redist\build\native\openssl.redist.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\libapr\build\native\libapr.props" Condition="exists('$(MSBuildThisFileDirectory)packages\libapr\build\native\libapr.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\libapr.redist\build\native\libapr.redist.props" Condition="exists('$(MSBuildThisFileDirectory)packages\libapr.redist\build\native\libapr.redist.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\libapr-util\build\native\libapr-util.props" Condition="exists('$(MSBuildThisFileDirectory)packages\libapr-util\build\native\libapr-util.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)packages\libapr-util.redist\build\native\libapr-util.redist.props" Condition="exists('$(MSBuildThisFileDirectory)packages\libapr-util.redist\build\native\libapr-util.redist.props')"/>
+</Project>
